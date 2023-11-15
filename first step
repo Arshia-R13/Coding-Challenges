@@ -1,0 +1,40 @@
+for the first Challeng i have to write a code in C++, to import a test.txt in C++ und calculate the bytes of text.
+
+the output have to be so :
+>ccwc -c test.txt
+  342190 test.txt
+
+# i think, my output has to be the number of bytes of Text but i want to be exatly like the output of website.
+
+my Code in C++:
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main() {
+
+    const char* fileName = "C:\\Users\\Arshia\\CLionProjects\\CCWC_Text\\Test.txt";
+
+    ifstream file(fileName, ios::binary);
+    //ifstream file("C:\\Users\\Arshia\\CLionProjects\\CCWC_Text\\Test.txt", ios::binary);
+
+    if (!file.is_open()){
+        cerr << "unable to open the file." << endl;
+        return EXIT_FAILURE;
+    }
+
+    file.seekg(0, ios::end);
+    streampos fileSize = file.tellg();
+    cout << ">ccwc -c test.txt"<< "\n" << "  " << fileSize << " test.txt" << endl;
+
+    file.close();
+
+    //return 0;
+    return EXIT_SUCCESS;
+}
+
+
+#
