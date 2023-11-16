@@ -14,27 +14,33 @@ my Code in C++:
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[] ) {
 
-    const char* fileName = "C:\\Users\\Arshia\\CLionProjects\\CCWC_Text\\Test.txt";
+    // Check if enough arguments were passed
+    if (argc < 2){
+        cerr << "Please enter the File-Name as the program-argument" << endl;
+        return EXIT_FAILURE;
+    }
 
+    // The file name is extracted from the program arguments
+    string fileName = argv[1];
+
+    // Open a file stream
     ifstream file(fileName, ios::binary);
-    //ifstream file("C:\\Users\\Arshia\\CLionProjects\\CCWC_Text\\Test.txt", ios::binary);
 
+    // Check, whether the file was opened successfully
     if (!file.is_open()){
         cerr << "unable to open the file." << endl;
         return EXIT_FAILURE;
     }
 
+    // count the Bytes in file
     file.seekg(0, ios::end);
     streampos fileSize = file.tellg();
     cout << ">ccwc -c test.txt"<< "\n" << "  " << fileSize << " test.txt" << endl;
 
+    // close the file
     file.close();
 
-    //return 0;
     return EXIT_SUCCESS;
 }
-
-
-#
