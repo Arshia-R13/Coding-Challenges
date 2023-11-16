@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char *argv[] ) {
+
+    // Check if enough arguments were passed
+    if (argc < 2){
+        cerr << "Please enter the File-Name as the program-argument" << endl;
+        return EXIT_FAILURE;
+    }
+
+    // The file name is extracted from the program arguments
+    string fileName = argv[1];
+
+    // Open a file stream
+    ifstream file(fileName, ios::binary);
+
+    // Check, whether the file was opened successfully
+    if (!file.is_open()){
+        cerr << "unable to open the file." << endl;
+        return EXIT_FAILURE;
+    }
+
+    // count the Bytes in file
+    file.seekg(0, ios::end);
+    streampos fileSize = file.tellg();
+    cout << ">ccwc -c test.txt"<< "\n" << "  " << fileSize << " test.txt" << endl;
+
+    // close the file
+    file.close();
+
+    return EXIT_SUCCESS;
+}
