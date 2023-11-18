@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int number_of_line = 0;
+
+void numberofline();
+
+int main(int argc, char *argv[])
+{
+    if (argc < 2)
+    {
+        printf("\n Please Enter the File-Name as Program-Name! ");
+        return EXIT_FAILURE;
+    }
+    string line;
+    string fileName = argv[1];
+
+    ifstream file(fileName);
+
+    if(!file.is_open())
+    {
+        printf("unable to open the File!\n");
+        return EXIT_FAILURE;
+    }
+
+    if(file.is_open())
+    {
+        while(!file.eof())
+        {
+            getline(file, line);
+            number_of_line++;
+        }
+        file.close();
+    }
+
+    numberofline();
+    //number_of_line--;
+    //cout << ">ccwc -l test.txt"<< "\n" << "  " << number_of_line << " test.txt" << endl;
+
+    return EXIT_SUCCESS;
+}
+
+void numberofline()
+{
+    number_of_line--;
+    printf(">ccwc -l test.txt\n    %d test.txt", number_of_line);
+}
