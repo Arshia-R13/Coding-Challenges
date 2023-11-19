@@ -1,0 +1,54 @@
+// For this step, it is expected to count the number of characters of a text file received from the command line arguments as input and display it, which is done as follows, 
+// but there is a problem that the result obtained is less than The answer is expected.
+
+#include <iostream>
+#include <fstream>
+//#include <sstream>
+#include <string>
+
+using namespace std;
+
+void numofChar();
+int numofChar2();
+int charCount = 0;
+int charCount2 = 0;
+
+int main(int argc, char* argv[])
+{
+    if(argc < 2){
+        cerr << "\nPlease Enter the file-Name as program-Name! ";
+        return EXIT_FAILURE;
+    }
+
+    string fileName = argv[1];
+
+    ifstream file(fileName);
+
+    if(!file.is_open()){
+        printf("\nUnable to open the File! ");
+        return EXIT_FAILURE;
+    }
+
+    if(file.is_open()){
+        cout << "\n>wc -m test.txt\n  339292 test.txt\n";
+        char current_char;
+        while(file.get(current_char)){
+            if(current_char == EOF)
+                break;
+            charCount ++;
+        }
+        /*
+        file.seekg(0,ios_base::end);
+        ios_base::streampos end_pos = file.tellg();
+        printf("\nccwc -m test.txt\n  %d test.txt", end_pos);
+        */
+    }
+    file.close();
+
+    numofChar();
+    return EXIT_SUCCESS;
+}
+
+void numofChar(){
+    printf("\nccwc -m test.txt\n  %d test.txt", charCount+1);
+}
