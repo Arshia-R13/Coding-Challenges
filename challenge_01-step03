@@ -1,0 +1,51 @@
+// for this step, I had to count and display the number of words of a text file received from the command line arguments as input, which I did as follows.
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+int wordCount = 0;
+void numofWord();
+
+int main(int argc, char* argv[])
+{
+    if(argc <2){
+        printf("\n Please Enter the File-Name as Program-Name! ");
+        return EXIT_FAILURE;
+    }
+
+    string file = argv[1];
+
+    ifstream inputFile(file);
+
+    if (!inputFile.is_open()){
+        cerr << "\n Unable to open the file!";
+        return EXIT_FAILURE;
+    }
+
+    if(inputFile.is_open()){
+
+        //int wordCount = 0;
+        string line;
+
+        while (getline(inputFile, line)){
+
+            stringstream ss(line);
+            string word;
+
+            while(ss >> word){
+                wordCount++;
+            }
+        }
+    }
+    inputFile.close();
+    //printf(">ccwc -w test.txt\n    %d test.txt", wordCount);
+    numofWord();
+
+    return 0;
+}
+
+void numofWord(){
+    printf(">ccwc -w test.txt\n   %d test.txt", wordCount);
+}
