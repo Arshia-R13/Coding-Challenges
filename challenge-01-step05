@@ -1,0 +1,100 @@
+// for this step, it is expected to count the number of LINE, WORD and BYTES of a text-file recived from the command line arguments as input together and displey them together, wich is done as follow:
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+int num_of_Line(string );
+int num_of_Word(string );
+int num_of_Bytes(string );
+
+int numofLine;
+int numofWord;
+int numofBytes;
+
+int main(int argc, char* argv[])
+{
+    if(argc < 2){
+        cerr << "please Enter the File-Name as Program-Arguments! "<< endl;
+        return EXIT_FAILURE;
+    }
+    string fileName = argv[1];
+    string FN = fileName;
+
+    numofLine = num_of_Line(FN);
+    numofWord = num_of_Word(FN);
+    numofBytes = num_of_Bytes(FN);
+
+    printf("\n>ccwc test.txt\n    %d   %d  %d test.txt", numofLine, numofWord, numofBytes);
+
+    return 0;
+}
+
+int num_of_Line(string filename){
+
+    ifstream inputFileL(filename);
+    if(!inputFileL.is_open()){
+        cerr << "\nUnable to open the File!(1)";
+        return EXIT_FAILURE;
+    }
+    string line;
+    int numofLine = 0;
+    while(!inputFileL.eof()){
+        getline(inputFileL, line);
+        numofLine++;
+    }
+    numofLine--;
+    inputFileL.close();
+
+    return numofLine;
+}
+
+int num_of_Word(string filename){
+
+    ifstream inputFileW(filename);
+
+    string line, word;
+    int numofWord = 0;
+
+    if(!inputFileW.is_open()){
+        cerr << "\nUnable to open the File!(2)";
+        return EXIT_FAILURE;
+    }
+    else{
+
+        while(getline(inputFileW,line)){
+
+            stringstream ss(line);
+
+            while(ss >> word){
+                numofWord++;
+            }
+        }
+    }
+    inputFileW.close();
+
+    return numofWord;
+}
+
+int num_of_Bytes(string fn){
+
+    ifstream inputFileB(fn, ios::binary);
+
+    if(!inputFileB.is_open()){
+        cerr << "\nUnable to open the File!(3)";
+        return EXIT_FAILURE;
+    }
+
+    else{
+
+        inputFileB.seekg(0,ios::end);
+        streampos numofBytes = inputFileB.tellg();
+        return numofBytes;
+    }
+
+    inputFileB.close();
+
+}
