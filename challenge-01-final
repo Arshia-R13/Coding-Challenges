@@ -1,0 +1,64 @@
+// For this step, it is expected to count and display the LINE number of a text file that is received either as standard input or from command line arguments, which is done as follows, but it is still incomplete and does not give a correct answer.
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int Count_Lines(istream &input){
+    int countLine = 0;
+    string line;
+
+    while(getline(input, line)){
+        countLine++;
+    }
+
+    return countLine;
+}
+
+int main(int argc, char* argv[]){
+
+    string fileName;
+    ifstream inputFile;
+    cout << "Enter the file name or provide it as a command-line argument: ";
+
+    if(argc > 1){
+
+        fileName = argv[1];
+        ifstream inputFile(fileName);
+        inputFile.is_open();
+
+        if(!inputFile.is_open()){
+
+            cerr << "\nunable to open the File(#1)";
+            return 1;   // Exit with an error code.
+        }
+
+    }
+    else{
+
+        //cout << "Enter the file name or provide it as a command-line argument: ";
+        cin >> fileName;
+        /*
+        inputFile.open(fileName);
+
+        if(!inputFile.is_open()){
+
+            cerr << "\nunable to open the File(#2)";
+            return 1;   // Exit with an error code.
+        }*/
+
+    }
+
+    int countLine = 0;
+    countLine = Count_Lines((argc == 2) ? inputFile : cin);
+    countLine = Count_Lines(inputFile);
+
+
+    if (inputFile.is_open()){
+        inputFile.close();
+    }
+    printf(">cat test.txt | ccwc -l\n    %d", countLine);
+    return 0;
+}
