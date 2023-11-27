@@ -1,0 +1,4 @@
+// for this challenge: The objective for this step is to parse a valid, basic JSON object, specifically: '{}', and an invalid JSON file, then accurately identify each.
+// First it is necessary to understand about JSON and enums in C++.
+
+// enum type-name {obj1, obj2, obj3 , ...} oder enum type-name2 {obj1= 1, obj2=2, ...}
