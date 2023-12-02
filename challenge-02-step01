@@ -2,3 +2,18 @@
 // First it is necessary to understand about JSON and enums in C++.
 
 // enum type-name {obj1, obj2, obj3 , ...} oder enum type-name2 {obj1= 1, obj2=2, ...}
+
+// We have a problem about the size of input and the storage space and we need another deklaer method: union
+// union Values {JASONObject *object, JSONList *list, std::string *s, float fValue, bool bValue}
+
+// Tokenization: instead of having a raw stream of characters, we have a stream of more logical units, like strings, numbers and other symbols.
+
+//first we have to deklear an enum for denoting all passiable token types:
+// enum class TOKEN { CURLY_OPEN, CURLY_CLOSE, ARRAY_OPEN, ARRAY_CLOSE, COLON, COMMA, STRING, NUMBER, BOOLEAN, NULL_TYPE }
+
+// We have a token struct (with token and its values):
+//   struct token {
+//     std::string value;
+//     TOKEN type;
+//     std::string toString();
+//   };
